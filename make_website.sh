@@ -59,19 +59,20 @@ touch $name.conf
 echo "<VirtualHost *:80>
 	ServerName $name
 	ServerAlias
-	ServerAdmin sysadm@acktel.com
+	ServerAdmin custom@mail.com
 	DocumentRoot /var/www/$name/$PUBLIC
 	<Directory /var/www/$name/$PUBLIC >
 		Options All
 		AllowOverride All
 		Require all granted
 	</Directory>
-	ErrorLog \${APACHE_LOG_DIR}/$name-error.log
-	CustomLog \${APACHE_LOG_DIR}/$name-access.log combined
+	ErrorLog /var/www/$name/$name-error.log
+	CustomLog /var/www/$name/$name-access.log combined
 </VirtualHost>" > $name.conf
 
 a2ensite $name.conf
-service apache2 reload
+#service apache2 reload # older version Ubuntu
+systemctl reload apache2
 
 echo -n "Website $name type with $websitetype created"
 printf "\n"
