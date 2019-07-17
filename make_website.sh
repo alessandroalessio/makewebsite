@@ -49,8 +49,8 @@ then
 	mkdir "$PUBLIC"
 
 	chgrp www-data -R public_html
-	chown developer -R public_html
-	chmod 775 -R public_html
+	chown www-data -R public_html
+	chmod 755 -R public_html
 fi
 
 # Creo il sites-available
@@ -66,8 +66,8 @@ echo "<VirtualHost *:80>
 		AllowOverride All
 		Require all granted
 	</Directory>
-	ErrorLog /var/www/$name/$name-error.log
-	CustomLog /var/www/$name/$name-access.log combined
+	ErrorLog /var/www/$name/error.log
+	CustomLog /var/www/$name/access.log combined
 </VirtualHost>" > $name.conf
 
 a2ensite $name.conf
